@@ -1,0 +1,15 @@
+# Ignore VCS and common large dirs
+.git
+.gitignore
+node_modules
+vendor
+tmp
+*.log
+.DS_Store
+
+# Ignore build artifacts
+build
+dist
+
+# Ignore any stray single-letter file "o" that caused the ENOENT in your log
+o

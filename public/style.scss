@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+$black:#0F0F0F;
+$gray:#7d7d7d;
+$white:#E5EAFA;
+$purple:#791E94;
+$red:#b41414;
+
+*{
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+@mixin formHover(){
+    border-radius:6px;
+    transform:translateY(-2px);
+    cursor:pointer;
+}
+@mixin formStyle(){
+    border:1px solid $gray;
+    border-radius:3px;
+    transition:250ms;
+}
+body{
+    min-height:90vh;
+    text-align: center;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+
+    h1{
+        font-size:3rem;
+    }
+
+    form{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        *{
+            margin-bottom:10px;
+        }
+        input{
+            width:120%;
+            @include formStyle();
+            padding:5px 10px;
+            &:hover{
+                @include formHover;
+            }
+            &:focus{
+                border-color:$purple;
+                background-color: darken($white, 0.5%);
+                outline:none;
+            }
+        }
+        button{
+            @include formStyle();
+            background-color: transparent;
+            padding:8px 12px;
+            
+            &:hover{
+                border-color:$purple;
+                background-color: #791E9421;
+                @include formHover;
+            }
+        }
+        &:nth-child(4){
+            margin-bottom:0;
+        }
+    }
+    .dangerZone{
+        button{
+            border:1px solid $red;
+            background-color: transparent;
+            padding:8px 12px;
+            transition:250ms;
+            &:hover{
+                @include formHover();
+                background-color: #b4141421;;
+            }
+        }
+    }
+
+}
