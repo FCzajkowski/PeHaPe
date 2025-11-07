@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - database
+    environment:
+      DATABASE_URL: "mysql://appuser:apppass@database:3306/test_database"
+
+  database:
+    image: mariadb:10.6
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: test_database
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: apppass
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./bazaDanych.sql:/docker-entrypoint-initdb.d/bazaDanych.sql
+    ports:
+      - "3307:3306"
+      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
+      # - ./docker/db/data:/var/lib/postgresql/data:rw
+
+volumes:
+  db_data:
+###< doctrine/doctrine-bundle ###

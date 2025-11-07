@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Car Management</title>
+    <link rel="stylesheet" href="{{ asset('normalize.css') }}">
+    <link rel="stylesheet" href="{{ asset('style.scss') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Car Management</h1>
+        
+        <form action="{{ path('cars_add') }}" method="POST">
+            <input type="text" name="brand" placeholder="Brand" required>
+            <input type="text" name="model" placeholder="Model" required>
+            <input type="number" name="year" placeholder="Year" required>
+            <button type="submit">Add Car</button>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Year</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for car in cars %}
+                    <tr>
+                        <td>{{ car.id }}</td>
+                        <td>{{ car.brand }}</td>
+                        <td>{{ car.model }}</td>
+                        <td>{{ car.year }}</td>
+                        <td>
+                            <form action="{{ path('cars_edit', {'id': car.id}) }}" method="POST" style="display: inline;">
+                                <input type="text" name="brand" value="{{ car.brand }}" required>
+                                <input type="text" name="model" value="{{ car.model }}" required>
+                                <input type="number" name="year" value="{{ car.year }}" required>
+                                <button type="submit">Update</button>
+                            </form>
+                            <form action="{{ path('cars_delete', {'id': car.id}) }}" method="POST" style="display: inline;">
+                                <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <form action="{{ path('cars_truncate') }}" method="POST">
+            <button type="submit" onclick="return confirm('Are you sure you want to delete all cars?')">Delete All Cars</button>
+        </form>
+    </div>
+</body>
+</html>
