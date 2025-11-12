@@ -60,6 +60,39 @@ class CarController extends AbstractController
                 $em->createQuery('DELETE FROM App\\Entity\\Car c')->execute();
                 return $this->redirectToRoute('cars_index');
             }
+
+            // ======================================== Funkcja Wstawienia przykładowych danych (10 samochodów)
+            if ($request->request->has('seed')) {
+                // usuń wszystko najpierw
+                $em->createQuery('DELETE FROM App\\Entity\\Car c')->execute();
+
+                $sample = [
+                    ['Toyota', 'Corolla', 2010],
+                    ['Ford', 'Focus', 2012],
+                    ['Honda', 'Civic', 2015],
+                    ['Volkswagen', 'Golf', 2013],
+                    ['BMW', '320i', 2014],
+                    ['Audi', 'A4', 2016],
+                    ['Mercedes', 'C200', 2011],
+                    ['Opel', 'Astra', 2009],
+                    ['Skoda', 'Octavia', 2017],
+                    ['Renault', 'Clio', 2008],
+                ];
+
+                for ($i = 0; $i < 10; $i++) {
+                    $data = $sample[$i % count($sample)];
+                    $car = new Car();
+                    $car->setBrand($data[0]);
+                    $car->setModel($data[1]);
+                    // add a small variation on year
+                    $car->setYear($data[2] + ($i % 3));
+                    $em->persist($car);
+                }
+
+                $em->flush();
+
+                return $this->redirectToRoute('cars_index');
+            }
         }
 
         $cars = $repo->findAll();
