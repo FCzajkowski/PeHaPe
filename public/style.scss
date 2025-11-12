@@ -21,6 +21,11 @@ $red:#b41414;
     border-radius:3px;
     transition:250ms;
 }
+.add{
+    input{
+        width:120%;
+    }
+}
 body{
     min-height:90vh;
     text-align: center;
@@ -41,7 +46,7 @@ body{
             margin-bottom:10px;
         }
         input{
-            width:120%;
+            
             @include formStyle();
             padding:5px 10px;
             &:hover{

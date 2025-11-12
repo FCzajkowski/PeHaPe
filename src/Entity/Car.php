@@ -13,13 +13,13 @@ class Car
     #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\Column(type: 'string', length: 50)]
+    #[ORM\Column(name: 'marka', type: 'string', length: 50)]
     private string $brand;
 
     #[ORM\Column(type: 'string', length: 50)]
     private string $model;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(name: 'rok', type: 'integer')]
     private int $year;
 
     public function getId(): ?int

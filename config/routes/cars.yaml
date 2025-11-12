@@ -1,7 +1,7 @@
 cars_index:
     path: /
     controller: App\Controller\CarController::index
-    methods: [GET]
+    methods: [GET, POST]
 
 cars_add:
     path: /cars/add

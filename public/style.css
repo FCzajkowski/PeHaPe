@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+* {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.add input {
+  width: 120%;
+}
+
+body {
+  min-height: 90vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+body h1 {
+  font-size: 3rem;
+}
+body form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+body form * {
+  margin-bottom: 10px;
+}
+body form input {
+  border: 1px solid #7d7d7d;
+  border-radius: 3px;
+  transition: 250ms;
+  padding: 5px 10px;
+}
+body form input:hover {
+  border-radius: 6px;
+  transform: translateY(-2px);
+  cursor: pointer;
+}
+body form input:focus {
+  border-color: #791E94;
+  background-color: rgb(226.8612903226, 232.2725806452, 249.5887096774);
+  outline: none;
+}
+body form button {
+  border: 1px solid #7d7d7d;
+  border-radius: 3px;
+  transition: 250ms;
+  background-color: transparent;
+  padding: 8px 12px;
+}
+body form button:hover {
+  border-color: #791E94;
+  background-color: rgba(121, 30, 148, 0.1294117647);
+  border-radius: 6px;
+  transform: translateY(-2px);
+  cursor: pointer;
+}
+body form:nth-child(4) {
+  margin-bottom: 0;
+}
+body .dangerZone button {
+  border: 1px solid #b41414;
+  background-color: transparent;
+  padding: 8px 12px;
+  transition: 250ms;
+}
+body .dangerZone button:hover {
+  border-radius: 6px;
+  transform: translateY(-2px);
+  cursor: pointer;
+  background-color: rgba(180, 20, 20, 0.1294117647);
+}/*# sourceMappingURL=style.css.map */
