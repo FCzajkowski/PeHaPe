@@ -1,1 +1,0 @@
-INSERT INTO auta (marka, model, rok) VALUES ('Hyundai', 'i30', 2021);

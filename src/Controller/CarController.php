@@ -24,7 +24,7 @@ class CarController extends AbstractController
             'cars' => $cars,
         ]);
     }
-
+    
     #[Route('/add', name: 'add', methods: ['POST'])]
     public function add(Request $request, ManagerRegistry $doctrine): Response
     {
