@@ -1,0 +1,9 @@
+<form method="POST" action="{{ path('cars_drop_all') }}">
+    <h2>UWAGA!</h2>
+    <button type="submit" onclick="return confirm('Jesteś pewien czy usunąć wszystkie rekordy?')">Usuń wszystkie rekordy</button>
+</form>
+
+<form method="POST" action="{{ path('cars_seed') }}" style="margin-top:10px;">
+    <h2>Przykładowe dane</h2>
+    <button type="submit" onclick="return confirm('Wstaw 10 przykładowych samochodów (usunie poprzednie)?')">Wstaw 10 przykładowych samochodów</button>
+</form>

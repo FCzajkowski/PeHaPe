@@ -20,63 +20,11 @@
 <body>
     <h1>Tabela Auta</h1>
 
-    <h2>Dodaj Auto</h2>
-    <form method="POST" class="add">
-        <input type="text" name="brand" placeholder="Marka" required>
-        <input type="text" name="model" placeholder="Model" required>
-        <input type="number" name="year" placeholder="Rok" required min="1886" max="2100">
-        <button type="submit" name="add">Dodaj</button>
-    </form>
+    {% include 'car/_add_form.html.twig' %}
 
-    <form method="POST">
-        <h2>UWAGA!</h2>
-        <button type="submit" name="drop_all" onclick="return confirm('Jesteś pewien czy usunąć wszystkie rekordy?')">Usuń wszystkie rekordy</button>
-    </form>
+    {% include 'car/_actions.html.twig' %}
 
-    <form method="POST" style="margin-top:10px;">
-        <h2>Przykładowe dane</h2>
-        <button type="submit" name="seed" onclick="return confirm('Wstaw 10 przykładowych samochodów (usunie poprzednie)?')">Wstaw 10 przykładowych samochodów</button>
-    </form>
+    {% include 'car/_table.html.twig' %}
 
-    <h2>Auta w Tabeli:</h2>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Marka</th>
-                <th>Model</th>
-                <th>Rok</th>
-                <th>Akcje</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for car in cars %}
-            
-                <tr>
-                    <td>{{ car.id }}</td>
-                    <td>{{ car.brand|e }}</td>
-                    <td>{{ car.model|e }}</td>
-                    <td>{{ car.year }}</td>
-                    <td>
-                        <form method="POST" style="display:inline;" >
-                            <input type="hidden" name="id" value="{{ car.id }}">
-                            <input type="text" name="brand" value="{{ car.brand|e }}" required>
-                            <input type="text" name="model" value="{{ car.model|e }}" required>
-                            <input type="number" name="year" value="{{ car.year }}" required>
-                            <button type="submit" name="edit">Edytuj</button>
-                        </form>
-                        <form method="POST" style="display:inline;">
-                            <input type="hidden" name="id" value="{{ car.id }}">
-                            <button type="submit" name="delete" onclick="return confirm('UWAGA: Nieodwracalnie usuniesz samochód z bazy')">Usuń</button>
-                        </form>
-                    </td> 
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="5">Brak rekordów</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
 </body>
 </html>
