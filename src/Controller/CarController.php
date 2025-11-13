@@ -9,9 +9,35 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/cars', name: 'cars_')]
 class CarController extends AbstractController
 {
+
+    #[Route('/add')]
+    public function add(Request $request, ManagerRegistry $doctrine): Response
+    {
+
+
+
+        dd('xxxxxxxxxxxxxxxxxxx');
+
+        return $this->render('car/index.html.twig', []);
+    }
+
+    #[Route('/')]
     public function index(Request $request, ManagerRegistry $doctrine): Response
+    {
+        $em = $doctrine->getManager();
+        $repo = $em->getRepository(Car::class);
+
+        $cars = $repo->findAll();
+
+        return $this->render('car/index.html.twig', [
+            'cars' => $cars,
+        ]);
+    }
+
+    public function index_oryginal(Request $request, ManagerRegistry $doctrine): Response
     {
         $em = $doctrine->getManager();
         $repo = $em->getRepository(Car::class);
