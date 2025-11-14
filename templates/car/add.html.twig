@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dodaj Auto{% endblock %}
+
+{% block header %}Dodaj Auto{% endblock %}
+
+{% block body %}
+    {% include 'car/_add_form.html.twig' %}
+
+    <p><a href="{{ path('cars_index') }}">Powrót do listy</a></p>
+{% endblock %}

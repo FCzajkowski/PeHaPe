@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Znajdź Auto po ID{% endblock %}
+
+{% block header %}Znajdź Auto po ID{% endblock %}
+
+{% block body %}
+    <form method="POST" action="{{ path('cars_find') }}">
+        <label>ID: <input type="number" name="id" min="1" required></label>
+        <button type="submit">Szukaj</button>
+    </form>
+    <p><a href="{{ path('cars_index') }}">Powrót do listy</a></p>
+{% endblock %}

@@ -17,12 +17,6 @@
                 <td>{{ car.model|e }}</td>
                 <td>{{ car.year }}</td>
                 <td>
-                    <form method="POST" style="display:inline;" action="{{ path('cars_edit', {'id': car.id}) }}">
-                        <input type="text" name="brand" value="{{ car.brand|e }}" required>
-                        <input type="text" name="model" value="{{ car.model|e }}" required>
-                        <input type="number" name="year" value="{{ car.year }}" required>
-                        <button type="submit">Edytuj</button>
-                    </form>
                     <form method="POST" style="display:inline;" action="{{ path('cars_delete', {'id': car.id}) }}">
                         <button type="submit" onclick="return confirm('UWAGA: Nieodwracalnie usuniesz samochód z bazy')">Usuń</button>
                     </form>

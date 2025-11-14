@@ -1,5 +1,6 @@
 <h2>Dodaj Auto</h2>
 <form method="POST" action="{{ path('cars_add') }}" class="add">
+    <input type="number" name="id" placeholder="ID (opcjonalne)" min="1">
     <input type="text" name="brand" placeholder="Marka" required>
     <input type="text" name="model" placeholder="Model" required>
     <input type="number" name="year" placeholder="Rok" required min="1886" max="2100">

@@ -11,7 +11,6 @@ services:
       - database
     # Load Docker-specific environment overrides so the container uses the
     # service hostname `database:3306` while the host machine can use
-    # a different DATABASE_URL (e.g. 127.0.0.1:3307).
     env_file:
       - ./.env.docker
 

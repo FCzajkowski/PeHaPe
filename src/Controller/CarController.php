@@ -24,23 +24,55 @@ class CarController extends AbstractController
             'cars' => $cars,
         ]);
     }
-    
+
+    #[Route('/add', name: 'add_page', methods: ['GET'])]
+    public function addPage(): Response
+    {
+        return $this->render('car/add.html.twig');
+    }
+
+    #[Route('/edit', name: 'edit_page', methods: ['GET'])]
+    public function editPage(ManagerRegistry $doctrine): Response
+    {
+        $em = $doctrine->getManager();
+        $repo = $em->getRepository(Car::class);
+
+        $cars = $repo->findAll();
+
+        return $this->render('car/edit.html.twig', [
+            'cars' => $cars,
+        ]);
+    }
+
     #[Route('/add', name: 'add', methods: ['POST'])]
     public function add(Request $request, ManagerRegistry $doctrine): Response
     {
         $em = $doctrine->getManager();
 
+        $id = $request->request->get('id');
         $brand = (string) $request->request->get('brand', '');
         $model = (string) $request->request->get('model', '');
         $year = (int) $request->request->get('year', 0);
 
-        $car = new Car();
-        $car->setBrand($brand);
-        $car->setModel($model);
-        $car->setYear($year);
+        if ($id !== null && $id !== '') {
+            // manual ID provided: insert via DBAL to bypass GeneratedValue
+            $conn = $em->getConnection();
+            $conn->insert('auta', [
+                'id' => (int) $id,
+                'marka' => $brand,
+                'model' => $model,
+                'rok' => $year,
+            ]);
+        } else {
+            // no ID provided: use ORM, DB will auto-generate
+            $car = new Car();
+            $car->setBrand($brand);
+            $car->setModel($model);
+            $car->setYear($year);
 
-        $em->persist($car);
-        $em->flush();
+            $em->persist($car);
+            $em->flush();
+        }
 
         return $this->redirectToRoute('cars_index');
     }
@@ -77,6 +109,24 @@ class CarController extends AbstractController
 
         return $this->redirectToRoute('cars_index');
     }
+    /* 
+        #[Route('/add/{brand}/{model}/{year}', name: 'add', methods: ['GET'])]
+        public function add(string $brand, string $model, int $year, ManagerRegistry $doctrine): Response
+        {
+            // sanitize & validate ...
+            $em = $doctrine->getManager();
+            $car = new Car();
+            $car->setBrand($brand);
+            $car->setModel($model);
+            $car->setYear($year);
+            $em->persist($car);
+            $em->flush();
+
+            return $this->redirectToRoute('cars_index');
+        }
+
+    */
+    
 
     #[Route('/delete/{id}', name: 'delete', methods: ['POST'])]
     public function delete(Request $request, ManagerRegistry $doctrine, int $id): Response

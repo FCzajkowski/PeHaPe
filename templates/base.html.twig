@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Kontrolki Auta{% endblock %}</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/normalize.css">
+    <style>
+        /* small page-local styles kept from previous template */
+    table { border-collapse: collapse; width: 100%; margin-top: 20px; text-align: center; font-size: 1rem; }
+        table th, table td { padding: 10px; }
+        table th { border-bottom: 2px solid #0F0F0F; }
+        table td { border-bottom: 1px solid #ccc; }
+        table tbody tr:last-child td { border-bottom: none; }
+        table td:nth-child(5) button { padding: 3px 7px; background: none; border: none; border-bottom: 1px solid transparent; cursor: pointer; transition: 200ms; }
+        table td:nth-child(5) button:nth-child(1):hover { border-bottom: 1px solid #791E94; }
+        table td:nth-child(5) button:nth-child(2):hover { border-bottom: 1px solid #b41414; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+    /* neutral "normal" button/link styling */
+    a.button { display:inline-block; padding:6px 10px; background:#f3f3f3; color:#000; text-decoration:none; border:1px solid #ccc; border-radius:4px; margin-right:10px; }
+    /* style form buttons to match "normal" appearance */
+    button, input[type="submit"] { background:#f3f3f3; color:#000; border:1px solid #ccc; padding:6px 10px; border-radius:4px; cursor:pointer; }
+    button:hover, input[type="submit"]:hover { background:#ececec; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{% block header %}Kontrolki Auta{% endblock %}</h1>
+
+        {# flash messages #}
+        {% for label, messages in app.flashes %}
+            {% for msg in messages %}
+                <div class="flash {{ label }}">{{ msg }}</div>
+            {% endfor %}
+        {% endfor %}
+
+        {% block body %}{% endblock %}
+    </div>
+</body>
+</html>

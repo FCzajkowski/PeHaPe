@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edytuj Auto{% endblock %}
+
+{% block header %}Edytuj Auto{% endblock %}
+
+{% block body %}
+    <form id="selectForm">
+        <label>Wybierz samochód:
+            <select name="carId" id="carSelect" required>
+                <option value="">-- Wybierz auto --</option>
+                {% for car in cars %}
+                    <option value="{{ car.id }}">ID: {{ car.id }} - {{ car.brand }} {{ car.model }} ({{ car.year }})</option>
+                {% endfor %}
+            </select>
+        </label>
+    </form>
+
+    
+        <div id="editFields" style="display:none; margin-top:8px;">
+            <form method="POST" action="{{ path('cars_edit', {'id': 0}) }}" id="carEditForm">
+                <label>Marka:<br>
+                    <input type="text" name="brand" id="editBrand" required>
+                </label>
+                <br>
+                <label>Model:<br>
+                    <input type="text" name="model" id="editModel" required>
+                </label>
+                <br>
+                <label>Rok:<br>
+                    <input type="number" name="year" id="editYear" required min="1886" max="2100">
+                </label>
+            </form>
+
+            <div class="edit-actions" style="margin-top:12px; justify-content:center;">
+                <!-- button that submits the edit form using the form attribute -->
+                <button type="submit" form="carEditForm">Zapisz</button>
+
+                <form method="POST" action="{{ path('cars_delete', {'id': 0}) }}" id="carDeleteForm">
+                    <button style="margin-top:10px;" type="submit" onclick="return confirm('UWAGA: Nieodwracalnie usuniesz samochód z bazy')">Usuń</button>
+                </form>
+            </div>
+        </div>
+
+    <p><a href="{{ path('cars_index') }}">Powrót do listy</a></p>
+
+    <script>
+        const carData = {
+            {% for car in cars %}
+                {{ car.id }}: { brand: '{{ car.brand|escape("js") }}', model: '{{ car.model|escape("js") }}', year: {{ car.year }} },
+            {% endfor %}
+        };
+
+        document.getElementById('carSelect').addEventListener('change', function() {
+            const carId = this.value;
+            const editFields = document.getElementById('editFields');
+            const carEditForm = document.getElementById('carEditForm');
+
+            if (carId && carData[carId]) {
+                const car = carData[carId];
+                document.getElementById('editBrand').value = car.brand;
+                document.getElementById('editModel').value = car.model;
+                document.getElementById('editYear').value = car.year;
+
+                // update form actions to the correct ID
+                carEditForm.action = '/cars/edit/' + carId;
+                const carDeleteForm = document.getElementById('carDeleteForm');
+                if (carDeleteForm) {
+                    carDeleteForm.action = '/cars/delete/' + carId;
+                }
+
+                editFields.style.display = 'block';
+            } else {
+                editFields.style.display = 'none';
+            }
+        });
+    </script>
+
+{% endblock %}
